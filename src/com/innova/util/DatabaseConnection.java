@@ -15,7 +15,7 @@ public class DatabaseConnection extends DatabaseInformation {
 
     //Singeleton Design pattern
 
-    private   DatabaseConnection instance;
+    private  static DatabaseConnection instance;
 
     //bundan sonra parametresiz constructor açılır ve private yapılır
 
@@ -39,13 +39,13 @@ public class DatabaseConnection extends DatabaseInformation {
 
 
 
-    public  DatabaseConnection getInstance() {
+    public static   DatabaseConnection getInstance() {
 
         try {
             if (instance==null)
-                this.instance=new DatabaseConnection();
+                instance=new DatabaseConnection();
             else if(instance.connection.isClosed())
-                this.instance=new DatabaseConnection();
+                instance=new DatabaseConnection();
         }catch (SQLException e){
             e.printStackTrace();
         }
@@ -55,8 +55,16 @@ public class DatabaseConnection extends DatabaseInformation {
         return instance;
     }
 
+    public Connection getConnection() {
+        return connection;
+    }
+
+    public void setConnection(Connection connection) {
+        this.connection = connection;
+    }
+
     public static void main(String[] args) {
-        DatabaseConnection databaseConnection=new DatabaseConnection();
+      // DatabaseConnection databaseConnection=new DatabaseConnection();
     }
 
 }
